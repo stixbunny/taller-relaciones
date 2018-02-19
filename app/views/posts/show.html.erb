@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+<p>
+  <strong>Comments</strong>
+</p>
+
+<% @comments.each do |comment|%>
+<ul>
+  <li><%= comment.content %></li>
+</ul>
+<% end %>
+
+<br>
+
+<%= form_with(model: Comment.new, local: true) do |f| %>
+ <%= hidden_field_tag :post_id, @post.id %>
+<%= f.text_area :content %>
+ <%= f.submit :enviar %>
+<% end %>
